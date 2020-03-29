@@ -6,4 +6,9 @@ authors:
 
 crystal: 0.33.0
 
+dependencies:
+  avram:
+    github: luckyframework/avram
+    version: ~> 0.12
+
 license: MIT
