@@ -30,7 +30,6 @@ class CreateUsers::V0 < Avram::Migrator::Migration::V1
   end
 end
 
-Db::Drop.new.call
 Db::Create.new(quiet: true).call
 Db::Migrate.new(quiet: true).call
 
