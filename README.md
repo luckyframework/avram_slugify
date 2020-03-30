@@ -14,24 +14,20 @@ creating nice looking URLs and permalinks.
        version: ~> 0.1
    ```
 
-2. Run `shards install`
+1. Run `shards install`
 
-## Require the shard
+1. Require the shard after requiring Avram
 
-### With Lucky projects
-
-Require the shard in your `src/shards.cr` file after requiring Avram:
+**If using Lucky,** require the shard in your `src/shards.cr` file after requiring Avram:
 
 ```crystal
-# After requiring Avram...
+# Put this after `require "avram"`
 require "avram_slugify"
 ```
-### With other Crystal projects
-
-Require the shard after Avram:
+**If not using Lucky,** require the shard after Avram:
 
 ```crystal
-# After requiring Avram...
+# Put this after `require "avram"`
 require "avram_slugify"
 ```
 
@@ -59,6 +55,35 @@ end
 
 So if the value of the slug candidate `title` is `"Avram is a great ORM"`, the
 `slug` value will be set to `avram-is-a-great-orm`.
+
+### Finding records
+
+You can find record with Avram's built-in query methods.
+
+```crystal
+ArticleQuery.new.slug("avram-is-a-great-orm").first
+```
+
+Or if you want to add a shortcut you can do something like this:
+
+```crystal
+class ArticleQuery < Article::BaseQuery
+   def find(slug_or_id : String | Int64) : Article
+     if slug_or_id.is_a?(Int64)
+       previous_def(slug_or_id)
+    else
+       slug(slug_or_id).first
+    end
+   end
+end
+
+# Find by slug
+ArticleQuery.find("avram-is-a-great-orm") 
+# Find by id
+ArticleQuery.find(1_i64) 
+# Can be scoped like any other query
+ArticleQuery.new.account_id(account.id).find("avram-is-a-great-orm")
+```
 
 ### What if the generated slug is not unique?
 
