@@ -1,4 +1,4 @@
-# avram_slugify
+# AvramSlugify
 
 TODO: Write a description here
 
@@ -9,7 +9,7 @@ TODO: Write a description here
    ```yaml
    dependencies:
      avram_slugify:
-       github: your-github-user/avram_slugify
+       github: luckyframework/avram_slugify
    ```
 
 2. Run `shards install`
@@ -20,15 +20,13 @@ TODO: Write a description here
 require "avram_slugify"
 ```
 
-TODO: Write usage instructions here
 
 ## Development
 
-TODO: Write development instructions here
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/avram_slugify/fork>)
+1. Fork it (<https://github.com/luckyframework/avram_slugify/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -36,4 +34,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [Paul Smith](https://github.com/your-github-user) - creator and maintainer
+- [Paul Smith](https://github.com/paulcsmith) - creator and maintainer
