@@ -70,6 +70,7 @@ describe AvramSlugify do
           op.slug.value.should eq("james-smith")
         end
       end
+
       describe "and the first slug candidate is not unique" do
         it "chooses the first unique one in the array" do
           UserBox.create &.slug("james")
@@ -98,7 +99,7 @@ describe AvramSlugify do
       end
 
       describe "all slug candidates are blank" do
-        it "leaves the slug blank" do
+        it "leaves the slug as nil" do
           op = build_op(first_name: "")
 
           # First string is empty. Added to make sure it is not used with
@@ -108,6 +109,18 @@ describe AvramSlugify do
           op.slug.value.should be_nil
         end
       end
+    end
+
+    it "uses the query to scope uniqueness check" do
+      UserBox.create &.slug("helen").job_title("A")
+
+      op = build_op(first_name: "Helen")
+      slugify(op.slug, op.first_name, UserQuery.new.job_title("B"))
+      op.slug.value.should eq("helen")
+
+      op = build_op(first_name: "Helen")
+      slugify(op.slug, op.first_name, UserQuery.new.job_title("A"))
+      op.slug.value.to_s.should start_with("helen-") # Has UUID appended
     end
   end
 end

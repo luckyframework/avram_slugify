@@ -6,20 +6,17 @@ module AvramSlugify
   VERSION = "0.1.0"
   extend self
 
-  alias SluggableAttribute = Avram::Attribute(String?)
-  alias SlugCandidate = String | SluggableAttribute | Array(SluggableAttribute | String | Array(SluggableAttribute))
-
   # :nodoc:
-  # This method is a shortcut method allowing you to use just a SluggableAttribute
+  # This method is a shortcut method allowing you to use just a Avram::Attribute(String?)
   # or String without wrapping it in an array.
-  def set(slug : SluggableAttribute,
-          using slug_candidate : SluggableAttribute | String,
+  def set(slug : Avram::Attribute(String?),
+          using slug_candidate : Avram::Attribute(String?) | String,
           query : Avram::Queryable) : Nil
     set(slug, [slug_candidate], query)
   end
 
   def set(slug : Avram::Attribute(String?),
-          using slug_candidates : Array(String | SluggableAttribute | Array(SluggableAttribute)),
+          using slug_candidates : Array(String | Avram::Attribute(String?) | Array(Avram::Attribute(String?))),
           query : Avram::Queryable) : Nil
     if slug.value.blank?
       slug_candidates = slug_candidates.map do |candidate|
@@ -41,11 +38,11 @@ module AvramSlugify
     Cadmium::Transliterator.parameterize(value)
   end
 
-  private def parameterize(value : SluggableAttribute) : String
+  private def parameterize(value : Avram::Attribute(String?)) : String
     parameterize(value.value.to_s)
   end
 
-  private def parameterize(values : Array(SluggableAttribute)) : String
+  private def parameterize(values : Array(Avram::Attribute(String?))) : String
     values.map do |value|
       parameterize(value)
     end.join("-")
