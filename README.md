@@ -21,12 +21,14 @@ creating nice looking URLs and permalinks.
 **If using Lucky,** require the shard in your `src/shards.cr` file after requiring Avram:
 
 ```crystal
+# In src/shards.cr
 # Put this after `require "avram"`
 require "avram_slugify"
 ```
 **If not using Lucky,** require the shard after Avram:
 
 ```crystal
+# In whichever file you require your shards
 # Put this after `require "avram"`
 require "avram_slugify"
 ```
