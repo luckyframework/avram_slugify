@@ -2,19 +2,21 @@ require "avram"
 require "cadmium_transliterator"
 require "uuid"
 
+# Set an `Avram::Atribute` to a slugified version of another attribute or `String`.
+#
+# See the [README](https://github.com/luckyframework/avram_slugify) for guides.
 module AvramSlugify
   VERSION = "0.1.0"
   extend self
 
-  # :nodoc:
-  # This method is a shortcut method allowing you to use just a Avram::Attribute(String?)
-  # or String without wrapping it in an array.
+  # See the [README](https://github.com/luckyframework/avram_slugify) for guides.
   def set(slug : Avram::Attribute(String?),
           using slug_candidate : Avram::Attribute(String?) | String,
           query : Avram::Queryable) : Nil
     set(slug, [slug_candidate], query)
   end
 
+  # See the [README](https://github.com/luckyframework/avram_slugify) for guides.
   def set(slug : Avram::Attribute(String?),
           using slug_candidates : Array(String | Avram::Attribute(String?) | Array(Avram::Attribute(String?))),
           query : Avram::Queryable) : Nil
