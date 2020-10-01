@@ -2,7 +2,7 @@ class AppDatabase < Avram::Database
 end
 
 AppDatabase.configure do |settings|
-  settings.url = ENV["DATABASE_URL"]? || Avram::PostgresURL.build(
+  settings.credentials = Avram::Credentials.parse?(ENV["DATABASE_URL"]?) || Avram::Credentials.new(
     database: "avram_slugify",
     hostname: "localhost",
     username: "postgres",
