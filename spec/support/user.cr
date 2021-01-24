@@ -19,5 +19,5 @@ end
 class UserQuery < User::BaseQuery
 end
 
-class UserBox < Avram::Box
+class UserFactory < Avram::Factory
 end

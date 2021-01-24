@@ -73,8 +73,8 @@ describe AvramSlugify do
 
       describe "and the first slug candidate is not unique" do
         it "chooses the first unique one in the array" do
-          UserBox.create &.slug("james")
-          UserBox.create &.slug("foo")
+          UserFactory.create &.slug("james")
+          UserFactory.create &.slug("foo")
           op = build_op(first_name: "James", last_name: "Smith")
 
           slugify(op.slug, [op.first_name, "foo", [op.first_name, op.last_name]])
@@ -85,8 +85,8 @@ describe AvramSlugify do
 
       describe "and all of the slug candidates are used already" do
         it "uses the first present candidate and appends a UUID" do
-          UserBox.create &.slug("james")
-          UserBox.create &.slug("smith")
+          UserFactory.create &.slug("james")
+          UserFactory.create &.slug("smith")
           op = build_op(first_name: "James", last_name: "Smith")
 
           # First string is empty. Added to make sure it is not used with
@@ -112,7 +112,7 @@ describe AvramSlugify do
     end
 
     it "uses the query to scope uniqueness check" do
-      UserBox.create &.slug("helen").job_title("A")
+      UserFactory.create &.slug("helen").job_title("A")
 
       op = build_op(first_name: "Helen")
       slugify(op.slug, op.first_name, UserQuery.new.job_title("B"))
