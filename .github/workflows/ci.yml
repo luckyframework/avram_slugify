@@ -18,7 +18,7 @@ jobs:
           - false
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
-    container: crystallang/crystal:${{ matrix.crystal_version }}-alpine
+    container: crystallang/crystal:${{ matrix.crystal_version }}
     steps:
       - uses: actions/checkout@v1
       - name: Install shards
@@ -38,7 +38,7 @@ jobs:
           - false
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
-    container: crystallang/crystal:${{ matrix.crystal_version }}-alpine
+    container: crystallang/crystal:${{ matrix.crystal_version }}
     services:
       postgres:
         image: postgres:10-alpine
@@ -55,13 +55,13 @@ jobs:
           apt-get update
           apt-get -yqq install libpq-dev postgresql-client
       - uses: actions/checkout@v2
-      - name: Install shards
-        run: shards install
       - name: Cache Crystal
         uses: actions/cache@v1
         with:
           path: ~/.cache/crystal
           key: ${{ runner.os }}-crystal
+      - name: Install shards
+        run: shards install
       - name: Run tests
         run: crystal spec
         env:
