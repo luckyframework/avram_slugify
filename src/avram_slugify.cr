@@ -10,15 +10,15 @@ module AvramSlugify
   extend self
 
   # See the [README](https://github.com/luckyframework/avram_slugify) for guides.
-  def set(slug : Avram::Attribute(String?),
-          using slug_candidate : Avram::Attribute(String?) | String,
+  def set(slug : Avram::Attribute(String),
+          using slug_candidate : Avram::Attribute(String) | String,
           query : Avram::Queryable) : Nil
     set(slug, [slug_candidate], query)
   end
 
   # See the [README](https://github.com/luckyframework/avram_slugify) for guides.
-  def set(slug : Avram::Attribute(String?),
-          using slug_candidates : Array(String | Avram::Attribute(String?) | Array(Avram::Attribute(String?))),
+  def set(slug : Avram::Attribute(String),
+          using slug_candidates : Array(String | Avram::Attribute(String) | Array(Avram::Attribute(String))),
           query : Avram::Queryable) : Nil
     if slug.value.blank?
       slug_candidates = slug_candidates.map do |candidate|
@@ -26,7 +26,7 @@ module AvramSlugify
       end.reject(&.blank?)
 
       slug_candidates.each do |candidate|
-        next if query.clone.where(slug.name, candidate).first?
+        next if query.where(slug.name, candidate).first?
         slug.value = candidate
       end
     end
@@ -40,13 +40,11 @@ module AvramSlugify
     Cadmium::Transliterator.parameterize(value)
   end
 
-  private def parameterize(value : Avram::Attribute(String?)) : String
+  private def parameterize(value : Avram::Attribute(String)) : String
     parameterize(value.value.to_s)
   end
 
-  private def parameterize(values : Array(Avram::Attribute(String?))) : String
-    values.map do |value|
-      parameterize(value)
-    end.join("-")
+  private def parameterize(values : Array(Avram::Attribute(String))) : String
+    values.join("-") { |value| parameterize(value) }
   end
 end
