@@ -4,12 +4,12 @@ version: 0.1.2
 authors:
   - Paul Smith <paulcsmith0218@gmail.com>
 
-crystal: ">= 0.36.1, < 2.0.0"
+crystal: ">= 1.0.0"
 
 dependencies:
   avram:
     github: luckyframework/avram
-    version: ~> 0.20.0
+    branch: master
   cadmium_transliterator:
     github: cadmiumcr/transliterator
     branch: master
