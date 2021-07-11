@@ -26,7 +26,7 @@ module AvramSlugify
       end.reject(&.blank?)
 
       slug_candidates.each do |candidate|
-        next if query.where(slug.name, candidate).first?
+        next if query.where(slug.name, candidate).any?
         slug.value = candidate
       end
     end
