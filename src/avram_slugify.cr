@@ -25,8 +25,8 @@ module AvramSlugify
         parameterize(candidate)
       end.reject(&.blank?)
 
-      candidate = slug_candidates.find { |candidate| query.where(slug.name, candidate).none? }
-      slug.value = candidate if candidate
+      slug_candidates.find { |candidate| query.where(slug.name, candidate).none? }
+        .tap { |candidate| slug.value = candidate }
     end
 
     if slug.value.blank? && (candidate = slug_candidates.first?)
