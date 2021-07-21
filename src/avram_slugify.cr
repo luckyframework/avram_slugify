@@ -6,7 +6,7 @@ require "uuid"
 #
 # See the [README](https://github.com/luckyframework/avram_slugify) for guides.
 module AvramSlugify
-  VERSION = "0.1.2"
+  VERSION = "0.2.0"
   extend self
 
   # See the [README](https://github.com/luckyframework/avram_slugify) for guides.
