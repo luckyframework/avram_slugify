@@ -1,5 +1,5 @@
 name: avram_slugify
-version: 0.2.0
+version: 0.2.1
 
 authors:
   - Paul Smith <paulcsmith0218@gmail.com>
@@ -9,7 +9,7 @@ crystal: ">= 1.0.0"
 dependencies:
   avram:
     github: luckyframework/avram
-    version: ~> 0.21.0
+    version: ~> 0.22.0
   cadmium_transliterator:
     github: cadmiumcr/transliterator
     branch: master
@@ -17,6 +17,6 @@ dependencies:
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.14.2
+    version: ~> 0.14.3
 
 license: MIT
