@@ -1,4 +1,6 @@
-# AvramSlugify
+# AvramSlugify (DEPRECATED)
+
+*This shard was officially migrated in to Avram directly* - [Read PR](https://github.com/luckyframework/avram/pull/786)
 
 AvramSlugify generates slugs for database columns. These slugs can be used for
 creating nice looking URLs and permalinks.
